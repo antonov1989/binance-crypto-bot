@@ -17,7 +17,7 @@ async function getCryptoPrices() {
         for (const coin of COINS) {
             const response = await axios.get(`${BINANCE_API_URL}?symbol=${coin}`, {
                 proxy: {
-                    host: "18.223.25.15",
+                    host: "13.38.153.36",
                     port: 80,
                 }
             });
@@ -32,7 +32,7 @@ async function getCryptoPrices() {
 async function sendCryptoUpdate() {
     const prices = await getCryptoPrices();
     if (Object.keys(prices).length === 0) {
-        await bot.sendMessage(TELEGRAM_CHAT_ID, '⚠️ Ошибка получения данных с Binance.');
+        //await bot.sendMessage(TELEGRAM_CHAT_ID, '⚠️ Ошибка получения данных с Binance.');
         return;
     }
 

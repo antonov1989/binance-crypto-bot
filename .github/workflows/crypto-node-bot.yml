@@ -1,4 +1,4 @@
-name: Crypto Telegram Bot
+name: Crypto Telegram Bot Node
 
 on:
   workflow_dispatch:  # Ручной запуск

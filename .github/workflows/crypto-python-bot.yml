@@ -1,4 +1,4 @@
-name: Crypto Telegram Bot
+name: Crypto Telegram Bot Python
 
 on:
   workflow_dispatch:
@@ -25,4 +25,4 @@ jobs:
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
           BINANCE_API_KEY: ${{ secrets.BINANCE_API_KEY }}
-        run: python bot.py
+        #run: python bot.py
