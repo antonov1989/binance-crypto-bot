@@ -1,5 +1,4 @@
 import os
-import time
 import requests
 import telebot
 
@@ -19,18 +18,25 @@ bot = telebot.TeleBot(TELEGRAM_BOT_TOKEN)
 def get_crypto_prices():
     prices = {}
     for coin in COINS:
-        response = requests.get(f"{BINANCE_API_URL}?symbol={coin}")
-        if response.status_code == 200:
+        try:
+            response = requests.get(f"{BINANCE_API_URL}?symbol={coin}")
+            response.raise_for_status()
             data = response.json()
             prices[coin] = float(data["price"])
+        except requests.RequestException as e:
+            print(f"Ошибка при получении {coin}: {e}")
     return prices
 
 def send_crypto_update():
     prices = get_crypto_prices()
-    message = "\n".join([f"{coin}: {price} USDT" for coin, price in prices.items()])
-    bot.send_message(TELEGRAM_CHAT_ID, f"📊 *Криптосводка на сегодня:*\n\n{message}", parse_mode="Markdown")
+    if not prices:
+        bot.send_message(TELEGRAM_CHAT_ID, "⚠️ Ошибка получения данных с Binance.")
+        return
+
+    message = "📊 *Криптосводка на сегодня:*\n\n"
+    message += "\n".join([f"💰 {coin}: `{price}` USDT" for coin, price in prices.items()])
+
+    bot.send_message(TELEGRAM_CHAT_ID, message, parse_mode="Markdown")
 
 if __name__ == "__main__":
-    while True:
-        send_crypto_update()
-        time.sleep(12 * 60 * 60)  # Отправлять раз в 12 часов
+    send_crypto_update()  # Одиночный запуск
