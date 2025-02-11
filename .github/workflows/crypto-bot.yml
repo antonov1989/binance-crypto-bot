@@ -1,6 +1,7 @@
 name: Crypto Telegram Bot
 
 on:
+  workflow_dispatch:
   schedule:
     - cron: "0 8,20 * * *"  # Запуск в 08:00 и 20:00 UTC (можно поменять)
 

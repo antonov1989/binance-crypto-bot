@@ -1,12 +1,11 @@
+import os
+import time
 import requests
 import telebot
-import time
 
-# API токен бота (замени на свой)
-TELEGRAM_BOT_TOKEN = "7674187229:AAH5JrO3tq_tb5HVVC0yG6pGhudg0NsXzZk"
-
-# ID чата (чтобы бот отправлял сообщения только тебе)
-TELEGRAM_CHAT_ID = "563527435"
+# Получаем токены из GitHub Secrets
+TELEGRAM_BOT_TOKEN = os.getenv("TELEGRAM_BOT_TOKEN")
+TELEGRAM_CHAT_ID = os.getenv("TELEGRAM_CHAT_ID")
 
 # API Binance (публичный)
 BINANCE_API_URL = "https://api.binance.com/api/v3/ticker/price"
