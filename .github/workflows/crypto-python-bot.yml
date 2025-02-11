@@ -1,9 +1,9 @@
 name: Crypto Telegram Bot Python
 
-on:
-  workflow_dispatch:
-  schedule:
-    - cron: "0 8,20 * * *"  # Запуск в 08:00 и 20:00 UTC (можно поменять)
+#on:
+  #workflow_dispatch:
+  #schedule:
+  #  - cron: "0 8,20 * * *"  # Запуск в 08:00 и 20:00 UTC (можно поменять)
 
 jobs:
   run_bot:
@@ -25,4 +25,4 @@ jobs:
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
           BINANCE_API_KEY: ${{ secrets.BINANCE_API_KEY }}
-        #run: python bot.py
+        run: python bot.py
