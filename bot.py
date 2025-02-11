@@ -13,7 +13,7 @@ if not TELEGRAM_BOT_TOKEN or not TELEGRAM_CHAT_ID:
     raise ValueError("❌ Ошибка: TELEGRAM_BOT_TOKEN или TELEGRAM_CHAT_ID не установлены!")
 
 # Binance API
-BINANCE_API_URL = "https://api.binance.com/api/v3/ticker/price"
+BINANCE_API_URL = "https://api1.binance.com/api/v3/ticker/price"
 COINS = ["BTCUSDT", "ETHUSDT", "SOLUSDT"]
 
 bot = telebot.TeleBot(TELEGRAM_BOT_TOKEN)
