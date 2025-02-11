@@ -24,7 +24,7 @@ async function getCryptoPrices() {
                 },
                 httpsAgent: agent,
             });
-            prices[coin] = parseFloat(response.data);
+            prices[coin] = response.data;
         }
     } catch (error) {
         console.error('❌ Ошибка при получении данных с Binance:', error);
