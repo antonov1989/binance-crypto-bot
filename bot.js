@@ -15,7 +15,12 @@ async function getCryptoPrices() {
     let prices = {};
     try {
         for (const coin of COINS) {
-            const response = await axios.get(`${BINANCE_API_URL}?symbol=${coin}`);
+            const response = await axios.get(`${BINANCE_API_URL}?symbol=${coin}`, {
+                proxy: {
+                    host: "18.223.25.15",
+                    port: 80,
+                }
+            });
             prices[coin] = parseFloat(response.data.price);
         }
     } catch (error) {
