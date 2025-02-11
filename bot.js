@@ -24,7 +24,7 @@ async function getCryptoPrices() {
                 },
                 httpsAgent: agent,
             });
-            prices[coin] = parseFloat(response.data.price);
+            prices[coin] = parseFloat(response.data);
         }
     } catch (error) {
         console.error('❌ Ошибка при получении данных с Binance:', error);
@@ -40,7 +40,7 @@ async function sendCryptoUpdate() {
     }
 
     let message = '📊 *Криптосводка:*\n\n' +
-        Object.entries(prices).map(([coin, price]) => `${coin}: ${price} USDT`).join('\n');
+        Object.entries(prices).map(([symbol, price]) => `${symbol}: ${price} USDT`).join('\n');
 
     await bot.sendMessage(TELEGRAM_CHAT_ID, message, { parse_mode: 'Markdown' });
 }
