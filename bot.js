@@ -1,5 +1,6 @@
 require('dotenv').config();
 const axios = require('axios');
+const https = require("https");
 const TelegramBot = require('node-telegram-bot-api');
 
 // Загружаем API-ключи из переменных окружения
@@ -10,6 +11,7 @@ const BINANCE_API_URL = 'https://api2.binance.com/api/v3/ticker/price';
 const COINS = ['BTCUSDT', 'ETHUSDT', 'SOLUSDT']; // Укажи свои монеты
 
 const bot = new TelegramBot(TELEGRAM_BOT_TOKEN);
+const agent = new https.Agent({ rejectUnauthorized: false });
 
 async function getCryptoPrices() {
     let prices = {};
@@ -19,7 +21,8 @@ async function getCryptoPrices() {
                 proxy: {
                     host: "13.38.153.36",
                     port: 80,
-                }
+                },
+                httpsAgent: agent,
             });
             prices[coin] = parseFloat(response.data.price);
         }
