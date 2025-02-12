@@ -3,8 +3,8 @@ name: Crypto Telegram Bot Node
 on:
   workflow_dispatch:  # Ручной запуск
   schedule:
-    - cron: "0 8 * * *"  # Запуск в 08:00
-    - cron: "0 21 * * *"  # Запуск в 21:00 UTC
+    - cron: "*/1 * * * *"  # Запуск в 08:00
+    #- cron: "0 21 * * *"  # Запуск в 21:00 UTC
 
 permissions:
   contents: read
