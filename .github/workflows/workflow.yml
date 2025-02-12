@@ -3,15 +3,12 @@ name: Crypto Telegram Bot Node
 on:
   workflow_dispatch:  # Ручной запуск
   schedule:
-    - cron: "*/10 * * * *"  # Запуск в 08:00
-    #- cron: "0 21 * * *"  # Запуск в 21:00 UTC
+    - cron: "0 5 * * *"  # Запуск в 08:00
+    - cron: "0 18 * * *"  # Запуск в 21:00
 
 jobs:
   run_bot:
     runs-on: ubuntu-latest
-
-    env:
-      ACTIONS_RUNNER_DEBUG: true
 
     steps:
       - name: Checkout repository
@@ -25,15 +22,8 @@ jobs:
       - name: Install dependencies
         run: npm install axios dotenv node-telegram-bot-api
 
-      - name: Debug Environment
-        run: |
-          echo "Запуск дебага..."
-          date -u
-
       - name: Run bot
         env:
-          ACTIONS_RUNNER_DEBUG: true
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
-          BINANCE_API_KEY: ${{ secrets.BINANCE_API_KEY }}
         run: node bot.js

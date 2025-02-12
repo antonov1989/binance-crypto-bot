@@ -5,10 +5,9 @@ const TelegramBot = require('node-telegram-bot-api');
 // Загружаем API-ключи из переменных окружения
 const TELEGRAM_BOT_TOKEN = process.env.TELEGRAM_BOT_TOKEN;
 const TELEGRAM_CHAT_ID = process.env.TELEGRAM_CHAT_ID;
-const BINANCE_API_KEY = process.env.BINANCE_API_KEY;
 
 const COINGECKO_API_URL = "https://api.coingecko.com/api/v3/simple/price";
-const COINS = ["ethereum", "solana", "xrp", "act-i-the-ai-prophecy", "pepe"]; // Укажи нужные монеты
+const COINS = ["ethereum", "solana", "act-i-the-ai-prophecy", "pepe"]; // Укажи нужные монеты
 const CURRENCY = "usd";
 
 const bot = new TelegramBot(TELEGRAM_BOT_TOKEN);
