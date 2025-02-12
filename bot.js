@@ -8,7 +8,7 @@ const TELEGRAM_CHAT_ID = process.env.TELEGRAM_CHAT_ID;
 const BINANCE_API_KEY = process.env.BINANCE_API_KEY;
 
 const COINGECKO_API_URL = "https://api.coingecko.com/api/v3/simple/price";
-const COINS = ["ethereum", "solana", "dogecoin", "act-i-the-ai-prophecy"]; // Укажи нужные монеты
+const COINS = ["ethereum", "solana", "xrp", "act-i-the-ai-prophecy", "pepe"]; // Укажи нужные монеты
 const CURRENCY = "usd";
 
 const bot = new TelegramBot(TELEGRAM_BOT_TOKEN);
