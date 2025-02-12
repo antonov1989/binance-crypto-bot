@@ -1,6 +1,5 @@
 require('dotenv').config();
 const axios = require('axios');
-const https = require("https");
 const TelegramBot = require('node-telegram-bot-api');
 
 // Загружаем API-ключи из переменных окружения
@@ -8,25 +7,28 @@ const TELEGRAM_BOT_TOKEN = process.env.TELEGRAM_BOT_TOKEN;
 const TELEGRAM_CHAT_ID = process.env.TELEGRAM_CHAT_ID;
 const BINANCE_API_KEY = process.env.BINANCE_API_KEY;
 
-const BINANCE_API_URL = 'https://api2.binance.com/api/v3/ticker/price';
-const COINS = ['BTCUSDT', 'ETHUSDT', 'SOLUSDT']; // Укажи свои монеты
+const COINGECKO_API_URL = "https://api.coingecko.com/api/v3/simple/price";
+const COINS = ["ethereum", "solana", "dogecoin", "act-i-the-ai-prophecy"]; // Укажи нужные монеты
+const CURRENCY = "usd";
 
 const bot = new TelegramBot(TELEGRAM_BOT_TOKEN);
-const agent = new https.Agent({ rejectUnauthorized: false });
 
 async function getCryptoPrices() {
     let prices = {};
     try {
+        const response = await axios.get(COINGECKO_API_URL, {
+            params: {
+                ids: COINS.join(","), // Запрос сразу для нескольких монет
+                vs_currencies: CURRENCY
+            }
+        });
+
         for (const coin of COINS) {
-            const response = await axios.get(`${BINANCE_API_URL}?symbol=${coin}`, {
-                proxy: {
-                    host: "13.38.153.36",
-                    port: 80,
-                },
-                headers: { 'X-MBX-APIKEY': BINANCE_API_KEY },
-                httpsAgent: agent,
-            });
-            prices[coin] = parseFloat(response.data.price);
+            if (response.data[coin]) {
+                prices[coin] = parseFloat(response.data[coin][CURRENCY]);
+            } else {
+                console.warn(`⚠️ Монета ${coin} не найдена на CoinGecko`);
+            }
         }
     } catch (error) {
         console.error('❌ Ошибка при получении данных с Binance:', error);
