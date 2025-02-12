@@ -37,6 +37,8 @@ async function getCryptoPrices() {
 }
 
 async function sendCryptoUpdate() {
+    console.log("🚀 Бот запущен!");
+
     const prices = await getCryptoPrices();
     if (Object.keys(prices).length === 0) {
         //await bot.sendMessage(TELEGRAM_CHAT_ID, '⚠️ Ошибка получения данных с Binance.');
